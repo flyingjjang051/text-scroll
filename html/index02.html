@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="kt cs" />
+    <meta property="og:description" content="kt cs는 고객여러분의 행복을 위하여 최선을 다하고 있습니다." />
+    <meta property="og:image" content="../images/layout/og-image.png" />
+
+    <title>NAS MEDIA</title>
+    <link rel="shortcut icon" href="../images/common/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Nunito:wght@900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/splitting.css" />
+    <link rel="stylesheet" href="../css/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/layout02.css" />
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/swiper-bundle.min.js"></script>
+    <script src="../js/splitting.min.js"></script>
+    <script src="../js/greensock/gsap.min.js"></script>
+    <script src="../js/greensock/CSSRulePlugin.min.js"></script>
+  </head>
+  <body>
+    <div id="main">
+      <div class="txtBox" id="marquee01">
+        <p></p>
+      </div>
+      <div class="txtBox" id="marquee02">
+        <p></p>
+      </div>
+    </div>
+    <script>
+      // 객체랑 배열은 참조
+      const origin = ["호랑이", "사자"];
+      const copy = [...origin];
+      copy.push("기린");
+      console.log(origin);
+      console.log(copy);
+
+      function add(a, b) {
+        return a + b;
+      }
+      console.log(add(10, 20));
+      function add02(...rest) {
+        console.log(rest);
+        let sum = 0;
+        // for (let i = 0; i < rest.length; i++) {
+        //   sum += rest[i];
+        // }
+        for (let num of rest) {
+          //console.log(num);
+          sum += num;
+        }
+        return sum;
+      }
+      console.log(add02(10, 20, 30, 40, 50));
+
+      const txt01 = "I was never less alone than when by myself";
+      const txt02 = "It is not length of life, But depth of life";
+
+      function makeMarquee(txtBox, txt, _duration = 10) {
+        const tempArray = txt.split(" ");
+        tempArray.push(...tempArray);
+        for (let txt of tempArray) {
+          $(txtBox).text($(txtBox).text() + " " + txt);
+        }
+        function moveTxt() {
+          const w = $(txtBox).width();
+          gsap.set(txtBox, { x: 0 });
+          gsap.to(txtBox, {
+            x: "-50%",
+            duration: _duration,
+            ease: "linear",
+            onComplete: function () {
+              moveTxt();
+            },
+          });
+        }
+        moveTxt();
+      }
+      function makeMarquee02(txtBox, txt, _duration = 10) {
+        const tempArray = txt.split(" ");
+        tempArray.push(...tempArray);
+
+        $(txtBox).text("  " + tempArray.join(" "));
+        function moveTxt() {
+          const w = $(txtBox).width();
+          gsap.set(txtBox, { x: 0 });
+          gsap.to(txtBox, {
+            x: "-50%",
+            duration: _duration,
+            ease: "linear",
+            onComplete: function () {
+              moveTxt();
+            },
+          });
+        }
+        moveTxt();
+      }
+      makeMarquee02("#marquee01 p", txt01, 10);
+      makeMarquee02("#marquee02 p", txt02, 15);
+    </script>
+  </body>
+</html>
