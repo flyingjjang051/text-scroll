@@ -23,7 +23,8 @@ a {
   overflow-x: hidden;
 }
 .txtBox {
-  width: 100vw;
+  width: 110vw;
+  margin-left: -5vw;
   display: flex;
   background-color: rgb(224, 36, 36);
   transform: rotate(3deg);
