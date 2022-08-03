@@ -34,24 +34,24 @@
       </a>
     </div>
     <script>
-      const loadX = $("#hover").offset().left;
-      const loadY = $("#hover").offset().top;
-      //console.log(loadX, "===", loadY);
-      $("#main").on("mousemove", function (e) {
-        const distX = e.clientX - loadX - 150;
-        const distY = e.clientY - loadY - 150;
-        //const dist = distX * distX + distY * distY;
-        //const dist = distX ** 2 + distY ** 2;
+      $("#hover").on("mousemove", function (e) {
+        const offsetX = $(this).offset().left;
+        const offsetY = $(this).offset().top;
+        const distX = e.clientX - offsetX - 150;
+        const distY = e.clientY - offsetY - 150;
         const dist = Math.sqrt(Math.pow(distX, 2) + Math.pow(distY, 2));
         const tr = (Math.atan2(distY, distX) * 180) / Math.PI;
-        if (dist < 150) {
-          gsap.to("#hover", { x: distX, y: distY, ease: "elastic", duration: 0.5 });
-          gsap.to("#hover span", { x: distX / 2, y: distY / 2, rotationX: -distY / 100, duration: 0.25 });
-        }
+        gsap.to("#hover", {
+          x: distX,
+          y: distY,
+          duration: 0.5,
+        });
+        //$("#hover span").css({ transform: "translateX(100px)" });
+        gsap.to("#hover span", { x: distX / 2, y: distY / 2, rotationX: -distY / 5, rotationY: distX / 5, duration: 0.25 });
       });
       $("#hover").on("mouseleave", function () {
         gsap.to("#hover", { x: 0, y: 0, ease: "elastic", duration: 1 });
-        gsap.to("#hover span", { x: 0, y: 0, rotationX: 0, rotationY: 0, rotationZ: 0, rotation: 0, duration: 0.25 });
+        gsap.to("#hover span", { x: 0, y: 0, rotationX: 0, rotationY: 0, ease: "elastic", duration: 1 });
       });
     </script>
   </body>
