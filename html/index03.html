@@ -117,10 +117,13 @@
       makeMarquee02("#marquee01 p", { direction: -1, duration: 12, txt: txt01, tweenId: "marquee01" });
       makeMarquee02("#marquee02 p", { duration: 10, txt: txt02, tweenId: "marquee02" });
       $(window).on("mousemove", function (e) {
-        const marquee01 = gsap.getById("marquee01");
+        //const marquee01 = gsap.getById("marquee01");
         const marquee02 = gsap.getById("marquee02");
-        marquee01.timeScale(e.clientY / 100);
-        marquee02.timeScale(e.clientY / 100);
+        //marquee01.timeScale(e.clientY / 100);
+        //marquee02.timeScale(e.clientY / 100);
+        const marquee02Y = $("#marquee02").offset().top;
+        const distY = Math.abs(e.clientY - marquee02Y);
+        marquee02.timeScale(distY / 100);
       });
       // $(window).on("scroll", function (e) {
       //   const marquee01 = gsap.getById("marquee01");

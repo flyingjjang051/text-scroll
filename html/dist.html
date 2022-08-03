@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="kt cs" />
+    <meta property="og:description" content="kt cs는 고객여러분의 행복을 위하여 최선을 다하고 있습니다." />
+    <meta property="og:image" content="../images/layout/og-image.png" />
+
+    <title>NAS MEDIA</title>
+    <link rel="shortcut icon" href="../images/common/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Nunito:wght@900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/splitting.css" />
+    <link rel="stylesheet" href="../css/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/dist.css" />
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/swiper-bundle.min.js"></script>
+    <script src="../js/splitting.min.js"></script>
+    <script src="../js/greensock/gsap.min.js"></script>
+    <script src="../js/greensock/CSSRulePlugin.min.js"></script>
+  </head>
+  <body>
+    <div id="main">
+      <a href="" id="hover">
+        <span>HOVER</span>
+      </a>
+    </div>
+    <script>
+      const loadX = $("#hover").offset().left;
+      const loadY = $("#hover").offset().top;
+      //console.log(loadX, "===", loadY);
+      $("#main").on("mousemove", function (e) {
+        //console.log("cx==", e.clientX);
+        //console.log("cy==", e.clientY);
+        const distX = e.clientX - loadX - 150;
+        const distY = e.clientY - loadY - 150;
+        //const dist = distX * distX + distY * distY;
+        //const dist = distX ** 2 + distY ** 2;
+        const dist = Math.sqrt(Math.pow(distX, 2) + Math.pow(distY, 2));
+        if (dist < 200) {
+          gsap.to("#hover", { x: 300, y: 300, ease: "elastic", duration: 1 });
+        }
+      });
+    </script>
+  </body>
+</html>
