@@ -38,16 +38,19 @@
       const loadY = $("#hover").offset().top;
       //console.log(loadX, "===", loadY);
       $("#main").on("mousemove", function (e) {
-        //console.log("cx==", e.clientX);
-        //console.log("cy==", e.clientY);
         const distX = e.clientX - loadX - 150;
         const distY = e.clientY - loadY - 150;
         //const dist = distX * distX + distY * distY;
         //const dist = distX ** 2 + distY ** 2;
         const dist = Math.sqrt(Math.pow(distX, 2) + Math.pow(distY, 2));
+        const tr = (Math.atan2(distY, distX) * 180) / Math.PI;
+        gsap.to("#hover", { rotation: tr });
         if (dist < 200) {
-          gsap.to("#hover", { x: 300, y: 300, ease: "elastic", duration: 1 });
+          gsap.to("#hover", { x: distX, y: distY, ease: "elastic", duration: 0.5 });
         }
+      });
+      $("#hover").on("mouseleave", function () {
+        gsap.to("#hover", { x: 0, y: 0, ease: "elastic", duration: 1 });
       });
     </script>
   </body>
